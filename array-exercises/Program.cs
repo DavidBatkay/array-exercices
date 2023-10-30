@@ -11,13 +11,11 @@
                 array[i] = ReadNumber($"Element at index {i}= ", 1);
             }
 
-            string elements= string.Join(", ", array);
-            Console.WriteLine("Array=" + elements);
+            string elements= string.Join(",", array);
+            Console.WriteLine("Array= " + elements);
 
-            for (int i = 0; i < n; i++)
-            {
-                Console.Write(array[i] + ", ");
-            }
+            int min = Min(array);
+            Console.WriteLine($"Min element={min}");
         }
 
         static int ReadNumber(string label, int maxAttempts)
@@ -42,6 +40,27 @@
             } while (attempts<=maxAttempts);
             Console.WriteLine($"No valid number input, continuing with 0 as value");
             return 0;
+        }
+
+        static int Min(int[] array)
+        {
+            if(array is null)
+            {
+               throw new ArgumentNullException(nameof(array), "Cannot calculate min value of a null array.");
+            }
+            if(array.Length==0)
+            {
+                throw new ArgumentException("Cannot calculate min value of an empty array.",nameof(array));
+            }
+            int min = array[0];
+            for (int i = 0; i < array.Length; i++)
+            {
+                if (array[i]<min)
+                {
+                    min= array[i];
+                }
+            }
+            return min;
         }
     }
 }

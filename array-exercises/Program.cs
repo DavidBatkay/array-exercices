@@ -16,6 +16,9 @@
 
             int min = Min(array);
             Console.WriteLine($"Min element={min}");
+            int[] sortedArray = SelectionSort(array);
+            string sortedElements = string.Join(", ", array);
+            Console.WriteLine("Sorted Array=" + sortedElements);
         }
 
         static int ReadNumber(string label, int maxAttempts)
@@ -61,6 +64,33 @@
                 }
             }
             return min;
+        }
+
+        public static int[] SelectionSort(int[] array)
+        {
+            if(array is null)
+            {
+                throw new ArgumentNullException(nameof(array),"Cannot sort a null array");
+            }
+            if(array.Length==0)
+            {
+                throw new ArgumentException("Cannot sort an empty array", nameof(array));
+            }
+            for (int i = 0; i < array.Length - 1; i++)
+            {
+                int min = array[i];
+                for(int j=i+1; j<array.Length;j++)
+                {
+                    if(array[j]<min)
+                    {
+                        int temp = array[i];
+                        array[i] = array[j];
+                        array[j] = temp;
+                    }
+                }
+   
+            }
+            return array;
         }
     }
 }
